@@ -1,0 +1,152 @@
+ScientificCalculator.apxc
+
+public class ScientificCalculator{
+    
+    // Method to perform Addition
+    public static Decimal addition(Decimal num1, Decimal num2) {
+        return num1 + num2;
+    }
+
+    // Method to perform subtraction
+    public static Decimal subtraction(Decimal num1, Decimal num2) {
+        return num1 - num2;
+    }
+    
+    // Method to perform multiplication
+    public static Decimal Multiplication(Decimal num1, Decimal num2) {
+        return num1 * num2;
+    }
+    
+    // Method to perform Division
+    public static Decimal Division(Decimal num1, Decimal num2) {
+        return num1 / num2;
+    }
+
+    // Method to calculate sine
+    public static Decimal sine(Decimal angle) {
+        return Math.sin(angle);
+    }
+
+    // Method to calculate cosine
+    public static Decimal cosine(Decimal angle) {
+        return Math.cos(angle);
+    }
+
+    // Method to calculate tangent
+    public static Decimal tangent(Decimal angle) {
+        return Math.tan(angle);
+    }
+
+    // Method to calculate square root
+    public static Decimal squareRoot(Decimal input) {
+        return Math.sqrt(input);
+    }
+
+    // Method to calculate natural logarithm
+    public static Decimal naturalLogarithm(Decimal input) {
+        return Math.log(input);
+    }
+
+    // Method to calculate base 10 logarithm
+    public static Decimal log10(Decimal input) {
+        return Math.log10(input);
+    }
+
+    // Method to calculate power
+    public static Decimal power(Decimal base, Decimal exponent) {
+        return Decimal.valueOf(Math.pow(base.doubleValue(), exponent.doubleValue()));
+    }
+
+    // Method to calculate absolute value
+    public static Decimal absolute(Decimal input) {
+        return Math.abs(input);
+    }
+
+    // Method to calculate factorial
+    public static Decimal factorial(Decimal input) {
+        Decimal result = 1;
+        for (Integer i = 2; i <= input.intValue(); i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    // Method to calculate exponentiation
+    public static Decimal exponentiation(Decimal base, Decimal exponent) {
+        return Decimal.valueOf(Math.exp(exponent.doubleValue() * Math.log(base.doubleValue())));
+    }
+}
+
+ScientificCalculatorController.apxc
+
+public class ScientificCalculatorController {
+    public Decimal inputValue1 { get; set; }
+    public Decimal inputValue2 { get; set; }
+    public String selectedFunction { get; set; }
+    public Decimal result { get; set; }
+
+    public void performCalculation() {
+        if(selectedFunction == 'Addition') {
+            result = ScientificCalculator.addition(inputValue1, inputValue2);
+        } else if(selectedFunction == 'Subtraction') {
+            result = ScientificCalculator.subtraction(inputValue1, inputValue2);
+        } else if(selectedFunction == 'Multiplication') {
+            result = ScientificCalculator.multiplication(inputValue1, inputValue2);
+        } else if(selectedFunction == 'Division') {
+            result = ScientificCalculator.division(inputValue1, inputValue2);
+        } else if(selectedFunction == 'Sine') {
+            result = ScientificCalculator.sine(inputValue1);
+        } else if(selectedFunction == 'Cosine') {
+            result = ScientificCalculator.cosine(inputValue1);
+        } else if(selectedFunction == 'Tangent') {
+            result = ScientificCalculator.tangent(inputValue1);
+        } else if(selectedFunction == 'Square Root') {
+            result = ScientificCalculator.squareRoot(inputValue1);
+        } else if(selectedFunction == 'Natural Logarithm') {
+            result = ScientificCalculator.naturalLogarithm(inputValue1);
+        } else if(selectedFunction == 'Log10') {
+            result = ScientificCalculator.log10(inputValue1);
+        } else if(selectedFunction == 'Power') {
+            result = ScientificCalculator.power(inputValue1, inputValue2);
+        } else if(selectedFunction == 'Absolute') {
+            result = ScientificCalculator.absolute(inputValue1);
+        } else if(selectedFunction == 'Factorial') {
+            result = ScientificCalculator.factorial(inputValue1);
+        } else if(selectedFunction == 'Exponentiation') {
+            result = ScientificCalculator.exponentiation(inputValue1, inputValue2);
+        }
+    }
+}
+
+ScientificCalculator.vfp
+
+<apex:page controller="ScientificCalculatorController">
+    <apex:form>
+        <apex:pageBlock title="Scientific Calculator">
+            <apex:pageBlockSection>
+                <apex:inputText value="{!inputValue1}" label="Enter Value 1"/>
+                <apex:inputText value="{!inputValue2}" label="Enter Value 2"/>
+                <apex:selectList value="{!selectedFunction}" label="Select Function">
+                    <apex:selectOption itemValue="Addition" itemLabel="Addition"/>
+                    <apex:selectOption itemValue="Subtraction" itemLabel="Subtraction"/>
+                    <apex:selectOption itemValue="multiplication" itemLabel="multiplication"/>
+                    <apex:selectOption itemValue="Division" itemLabel="Division"/>
+                    <apex:selectOption itemValue="sine" itemLabel="sine"/>
+                    <apex:selectOption itemValue="cosine" itemLabel="cosine"/>
+                    <apex:selectOption itemValue="tangent" itemLabel="tangent"/>
+                    <apex:selectOption itemValue="squareRoot" itemLabel="squareRoot"/>
+                    <apex:selectOption itemValue="naturalLogarithm" itemLabel="naturalLogarithm"/>
+                    <apex:selectOption itemValue="log10" itemLabel="log10"/>
+                    <apex:selectOption itemValue="power" itemLabel="power"/>
+                    <apex:selectOption itemValue="absolute" itemLabel="absolute"/>
+                    <apex:selectOption itemValue="factorial" itemLabel="factorial"/>
+                    <apex:selectOption itemValue="exponentiation" itemLabel="exponentiation"/>
+                </apex:selectList>
+                <apex:commandButton value="Calculate" action="{!performCalculation}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!result != null}">
+                <apex:outputText value="Result: {!result}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
