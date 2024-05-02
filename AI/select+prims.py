@@ -47,21 +47,18 @@ def selection_sort(arr):
         arr[i], arr[min_index] = arr[min_index], arr[i]
     return arr
 
-# Example usage:
 if __name__ == "__main__":
     print("Selection Sort:")
-    arr = [64, 25, 12, 22, 11]
+    arr = list(map(int, input("Enter space-separated integers for array: ").split()))
     sorted_arr = selection_sort(arr)
     print("Sorted array:", sorted_arr)
 
     print("\nPrim's Minimal Spanning Tree Algorithm:")
-    g = Graph(5)
-    g.add_edge(0, 1, 2)
-    g.add_edge(0, 3, 6)
-    g.add_edge(1, 2, 3)
-    g.add_edge(1, 3, 8)
-    g.add_edge(1, 4, 5)
-    g.add_edge(2, 4, 7)
-    g.add_edge(3, 4, 9)
-
+    vertices = int(input("Enter the number of vertices in the graph: "))
+    g = Graph(vertices)
+    edges = int(input("Enter the number of edges in the graph: "))
+    print("Enter edges in the format 'source destination weight':")
+    for _ in range(edges):
+        u, v, weight = map(int, input().split())
+        g.add_edge(u, v, weight)
     g.prim_mst()
